@@ -1,6 +1,8 @@
-from pydantic import BaseModel, Field, EmailStr
+from fastapi import FastAPI, Depends
+from schemas.request import UserCreate
+from schemas.response import UserResponse
+from schemas.params import FilterParams
 
+app = FastAPI()
 
-class UserCreate(BaseModel):
-    username: str = Field(..., min_length=3, max_length=50)
-    age: int = Field(None, ge=0, le=120)
+@app.post("/users", response_model=UserResponse)
